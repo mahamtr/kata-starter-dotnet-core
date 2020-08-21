@@ -8,8 +8,15 @@ namespace Kata
         public int Add(string input = "")
         {
             if(String.IsNullOrWhiteSpace(input)) return 0;
-            var separators = new[] {',', '\n'};
-            var numbersList = input.Split(separators, StringSplitOptions.None);
+            var separators = new[] {',', '\n',';'};
+            string stringToSplit = input;
+            if (input.Contains("//"))
+            {
+                var numbersAfterBreakLine = input.Split("\n");
+                stringToSplit = numbersAfterBreakLine[1];
+            }
+            
+            var numbersList = stringToSplit.Split(separators, StringSplitOptions.None);
             return numbersList.Sum(i=> int.Parse(i));
         }
     }
